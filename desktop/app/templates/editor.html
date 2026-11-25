@@ -27,7 +27,7 @@ function assembled(a){
    return out.slice(0,-1)+part;
   }
   return out+' '+part;
- },'').replace(/[ \\t]{2,}/g,' ').trim();
+ },'').replace(/[ \t]{2,}/g,' ').trim();
 }
 function textToContent(t){return (t||'').split(/\n\s*\n|\n/).map(x=>x.trim()).filter(Boolean).map(text=>({type:'paragraph',text}))}
 function activeArticle(){return articles.find(x=>x.id===active)}
