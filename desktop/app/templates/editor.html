@@ -18,7 +18,17 @@ const colors=['#9f1d2d','#245b8a','#8a5b20','#34734a','#7b4c8e','#16757c','#a452
 const categories=[['radnice','Z radnice'],['investice','Investice'],['kultura','Kultura'],['skolstvi','Školství'],['sport','Sport'],['spolky','Spolky'],['socialni','Sociální oblast'],['osobnosti','Osobnosti'],['historie','Historie'],['pozvanky','Pozvánky'],['odpad','Odpad'],['doprava','Doprava'],['ekonomika','Ekonomika'],['knihovna','Knihovna'],['muzeum','Muzeum'],['inzerce','Inzerce'],['ostatni','Ostatní']];
 articles.forEach((a,i)=>{a.images=a.images||[];a.regions=a.regions||[];a.type=a.type||'article';a.color=a.color||colors[i%colors.length];a.mediaMeta=a.mediaMeta||{};if(!a.content)a.content=textToContent(a.text||assembled(a))});
 function block(id){for(const p of pages){const b=p.blocks.find(x=>x.id===id);if(b)return b}}
-function assembled(a){return (a.blocks||[]).map(id=>block(id)?.text||'').join(' ')}
+function assembled(a){
+ const parts=(a.blocks||[]).map(id=>(block(id)?.text||'').trim()).filter(Boolean);
+ return parts.reduce((out,part)=>{
+  if(!out)return part;
+  // PDF extraction can split one hyphenated word across two separate blocks.
+  if(/[A-Za-zÁ-ž]{2,}-$/.test(out)&&/^[a-zá-ž]/.test(part)){
+   return out.slice(0,-1)+part;
+  }
+  return out+' '+part;
+ },'').replace(/[ \\t]{2,}/g,' ').trim();
+}
 function textToContent(t){return (t||'').split(/\n\s*\n|\n/).map(x=>x.trim()).filter(Boolean).map(text=>({type:'paragraph',text}))}
 function activeArticle(){return articles.find(x=>x.id===active)}
 function armNewCrop(){forceNewCrop=!forceNewCrop;mode='photo';captionTarget=null;document.getElementById('modeText').classList.remove('activeMode');document.getElementById('modePhoto').classList.add('activeMode');renderAll(true)}
