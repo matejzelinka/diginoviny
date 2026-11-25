@@ -30,26 +30,23 @@ def historical_lexicon() -> set[str]:
     return words
 
 def clean_text(text: str) -> str:
-    text = unicodedata.normalize("NFC", text).replace("\ufffe","").replace("\u00ad","")
-    lex = historical_lexicon()
+    """Normalize extracted PDF text without flattening meaningful paragraph breaks."""
+    text = unicodedata.normalize("NFC", text or "")
+    text = text.replace("\\ufffe", "").replace("\\u00ad", "")
 
-    def join_hyphen(m):
-        left, right = m.group(1), m.group(2)
-        joined = (left + right).lower()
-        # Typický PDF zlom: "objek- tu", "pří- stupu", "kan- celářím".
-        # Mezera nebo nový řádek za spojovníkem je silný signál dělení slova.
-        if joined in lex or right[:1].islower():
-            return left + right
-        return left + "-" + right
-
-    # DŮLEŽITÉ: funguje pro nový řádek i pro mezery vzniklé spojením PDF bloků.
+    # A line break after a hyphen is a likely PDF line-wrap. Do not join a
+    # hyphen followed only by an ordinary space: that may be a real hyphen.
     text = re.sub(
-        r'([A-Za-zÁ-ž]{2,})-[ \t\r\n]+([a-zá-ž][A-Za-zÁ-ž]*)',
-        join_hyphen,
-        text
+        r"([A-Za-zÁ-ž]{2,})-[ \\t]*\\r?\\n[ \\t]*([a-zá-ž][A-Za-zÁ-ž]*)",
+        r"\\1\\2",
+        text,
     )
-    text = re.sub(r'\s*\n\s*', ' ', text)
-    return re.sub(r'[ \t]+', ' ', text).strip()
+
+    # Normalize spacing within lines, but retain blank lines as paragraph breaks.
+    lines = [re.sub(r"[ \\t]+", " ", line).strip() for line in text.splitlines()]
+    text = "\\n".join(lines)
+    text = re.sub(r"\\n{3,}", "\\n\\n", text)
+    return text.strip()
 
 def article_checks(a: dict) -> dict:
     errors=[]
