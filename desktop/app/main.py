@@ -32,20 +32,20 @@ def historical_lexicon() -> set[str]:
 def clean_text(text: str) -> str:
     """Normalize extracted PDF text without flattening meaningful paragraph breaks."""
     text = unicodedata.normalize("NFC", text or "")
-    text = text.replace("\\ufffe", "").replace("\\u00ad", "")
+    text = text.replace("\ufffe", "").replace("\u00ad", "")
 
     # A line break after a hyphen is a likely PDF line-wrap. Do not join a
     # hyphen followed only by an ordinary space: that may be a real hyphen.
     text = re.sub(
-        r"([A-Za-zÁ-ž]{2,})-[ \\t]*\\r?\\n[ \\t]*([a-zá-ž][A-Za-zÁ-ž]*)",
-        r"\\1\\2",
+        r"([A-Za-zÁ-ž]{2,})-[ \t]*\r?\n[ \t]*([a-zá-ž][A-Za-zÁ-ž]*)",
+        r"\1\2",
         text,
     )
 
     # Normalize spacing within lines, but retain blank lines as paragraph breaks.
-    lines = [re.sub(r"[ \\t]+", " ", line).strip() for line in text.splitlines()]
-    text = "\\n".join(lines)
-    text = re.sub(r"\\n{3,}", "\\n\\n", text)
+    lines = [re.sub(r"[ \t]+", " ", line).strip() for line in text.splitlines()]
+    text = "\n".join(lines)
+    text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
 def article_checks(a: dict) -> dict:
