@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+web/config.php
+publish-settings.json
+desktop/uploads/*
+desktop/generated/*
+desktop/data/issues/*
+web/uploads/*
+web/import/*
+web/issues/*
+.DS_Store
+Thumbs.db

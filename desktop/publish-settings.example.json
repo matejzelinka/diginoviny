@@ -1,0 +1,5 @@
+{
+  "publish_url": "https://mesto.skutec.cz/diginoviny/api/publish.php",
+  "publish_token": "SEM_VLOZ_STEJNY_TOKEN_JAKO_V_CONFIG_PHP",
+  "verify_ssl": false
+}

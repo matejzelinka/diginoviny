@@ -1,0 +1,557 @@
+500;600;700;800&display=swap');
+500;600;700;800&display=swap');
+:root{--ink:#172033;--paper:#f4f0e8;--white:#fff;--muted:#68717d;--line:#d8d2c7;--accent:#a3232f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif;line-height:1.6}a{color:inherit}.top{background:var(--ink);color:#fff;padding:16px 24px}.top a{text-decoration:none}.topin,.wrap{max-width:1180px;margin:auto}.topin{display:flex;justify-content:space-between;align-items:center}.wrap{padding:42px 24px 90px}.hero h1,.article h1{font:700 clamp(44px,8vw,90px)/.96 Georgia,serif}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.13em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}.card,.panel{background:#fff;padding:25px}.card{text-decoration:none;border-top:5px solid var(--ink)}.card h2{font:700 29px/1.1 Georgia,serif}button,.btn{border:0;border-radius:7px;padding:10px 13px;font-weight:700;cursor:pointer;background:#e7ebf1;text-decoration:none;display:inline-block}.primary{background:#2367d1;color:#fff}.success{background:#16803c!important;color:#fff}.danger{color:#8a1f1f}.formrow,.row,.audio{display:flex;gap:8px;flex-wrap:wrap}.formrow input,.side input,.side select,textarea{padding:10px;border:1px solid #ccd2db;border-radius:5px}.progress{margin-top:15px;font-weight:700}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:13px;border-bottom:1px solid var(--line);text-align:left}.login{min-height:100vh;display:grid;place-items:center}.login .panel{width:min(420px,90vw)}.login input{width:100%;padding:12px;margin-bottom:10px}.error{color:#a00}.toc{background:#fff;padding:0 22px}.toc li{border-bottom:1px solid var(--line)}.toc a{display:flex;gap:12px;align-items:center;padding:14px 0;text-decoration:none}.cat{display:inline-block;padding:5px 9px;border-radius:999px;font:800 11px/1 Arial;text-transform:uppercase;letter-spacing:.07em}.cat-investice{background:#e8f1ff;color:#174f9b}.cat-radnice{background:#efe8ff;color:#6030a8}.cat-osobnosti{background:#f6e8e8;color:#8e2930}.cat-sport{background:#e6f5e9;color:#246c35}.cat-kultura{background:#fff0d9;color:#945a00}.cat-skolstvi{background:#e4f5f5;color:#11666a}.cat-spolky{background:#f2eadf;color:#79512c}.cat-ostatni{background:#eceff2;color:#4c5966}.article{max-width:850px}.articletext{font:20px/1.75 Georgia,serif}.audio{background:#fff;padding:15px;margin:25px 0}.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}.gallery img{width:100%;height:auto;object-fit:contain}.editorbody{overflow:hidden}.editorhead{height:58px}.editor{display:grid;grid-template-columns:minmax(600px,1fr) 450px;height:calc(100vh - 58px)}.viewer{overflow:auto;padding:20px}.side{background:#fff;border-left:1px solid #ccd2db;overflow:auto;padding:15px}.page{position:relative;margin:0 auto 25px;max-width:850px;box-shadow:0 5px 25px #0003;background:#fff;touch-action:none}.page>img{display:block;width:100%;height:100%}.block{position:absolute;border:1.5px solid #c22;cursor:pointer;z-index:2}.block.selected{border:4px solid var(--c);background:color-mix(in srgb,var(--c) 18%,transparent)}.block span{font-size:9px;background:#b51e2d;color:#fff;padding:1px 3px}.cropbox{position:absolute;border:4px dashed #e08a00;background:#ffae0033;z-index:9;pointer-events:none}.articleitem{border:1px solid #ddd;padding:10px;margin:8px 0;cursor:pointer}.articleitem.active{outline:3px solid var(--c)}.articleitem small{display:block;color:var(--muted)}.side input,.side select,textarea{width:100%;margin:5px 0}.source{font-size:12px;background:#eef2f7;padding:8px;max-height:150px;overflow:auto}.muted{font-size:12px;color:var(--muted)}textarea{min-height:270px}.thumbs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.thumbs img{width:100%;height:100px;object-fit:contain;background:#eee}.thumbs button{width:100%}@media(max-width:800px){.editor{grid-template-columns:1fr}.side{display:none}.gallery{grid-template-columns:1fr}}
+/* V2.1 – vizuální sjednocení s webem města Skuteč */
+:root{
+  --ink:#333333;
+  --paper:#f5f5f3;
+  --white:#fff;
+  --muted:#6b6b6b;
+  --line:#dedede;
+  --accent:#a61f2d;
+  --city-red:#a61f2d;
+  --city-dark:#292929;
+}
+body{font-family:Arial,"Helvetica Neue",sans-serif;background:#f5f5f3;color:#333}
+.citybar{background:#fff;border-bottom:1px solid #e7e7e7;padding:17px 24px}
+.citybrand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.citybrand>span:last-child{display:flex;flex-direction:column;line-height:1.05}
+.citybrand b{font-size:25px;font-weight:700;color:#292929}
+.citybrand small{font-size:12px;color:#777;margin-top:5px}
+.citymark{display:grid;place-items:center;width:48px;height:48px;background:var(--city-red);color:#fff;font:700 29px/1 Georgia,serif}
+.cityback{font-size:12px;font-weight:700;text-transform:uppercase;text-decoration:none;color:#666;letter-spacing:.04em}
+.top{background:var(--city-red);padding:15px 24px}
+.hero{padding-top:54px}
+.hero h1,.article h1{font-family:Arial,"Helvetica Neue",sans-serif;letter-spacing:-.045em}
+.hero h1{font-weight:750}
+.card{border-top:4px solid var(--city-red);box-shadow:0 2px 10px #0000000d;transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 7px 22px #00000014}
+.card h2{font-family:Arial,"Helvetica Neue",sans-serif;letter-spacing:-.025em}
+.eyebrow{color:var(--city-red)}
+.primary{background:var(--city-red)}
+.toc a:hover{color:var(--city-red)}
+.articletext{font-family:Arial,"Helvetica Neue",sans-serif;font-size:19px;line-height:1.75}
+.gallery{grid-template-columns:1fr;gap:18px}
+.gallery img{display:block;width:auto;max-width:100%;max-height:720px;margin:auto;object-fit:contain;background:#fff}
+.footer{background:#292929;color:#fff;padding:34px 24px;margin-top:50px}
+.footer .topin{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer span{color:#d0d0d0}
+@media(max-width:650px){.cityback{display:none}.citybar{padding:13px 18px}.citymark{width:42px;height:42px}.citybrand b{font-size:22px}}
+
+/* WEB V3 FINAL */
+.cat-radnice{background:#f4e4e7;color:#8d1827}.cat-investice{background:#e5edf6;color:#245b8a}.cat-kultura{background:#f4eadb;color:#815315}.cat-skolstvi{background:#e4f1e8;color:#28623d}.cat-sport{background:#eee6f2;color:#684078}.cat-spolky{background:#e2f1f2;color:#12646a}.cat-socialni{background:#f5e7df;color:#91421f}.cat-osobnosti{background:#e9efe2;color:#4d692f}.cat-historie{background:#f1e4e9;color:#743046}.cat-pozvanky{background:#fff0dc;color:#92550c}.cat-odpad{background:#e6ecef;color:#405d70}.cat-doprava{background:#eee9e5;color:#674c3f}.cat-ekonomika{background:#e3eff0;color:#2d686f}.cat-knihovna{background:#f2ecd9;color:#755e1c}.cat-muzeum{background:#ece6f0;color:#62436f}.cat-inzerce{background:#f7dfdf;color:#9b3232}.cat-ostatni{background:#eceff2;color:#4c5966}
+.pdfdownload{display:flex;align-items:center;justify-content:space-between;gap:25px;background:#fff;border-left:6px solid var(--city-red);padding:22px 25px;margin:28px 0 42px;box-shadow:0 3px 14px #0000000d}.pdfdownload p{margin:4px 0 0}.pdfbtn{background:var(--city-red);color:#fff;text-decoration:none;font-weight:800;padding:14px 18px;white-space:nowrap}
+.articletext p{margin:0 0 1.4em}.articletext figure,.visualcontent figure{margin:34px 0}.articletext figure img,.visualcontent figure img{display:block;max-width:100%;height:auto;margin:auto}.articletext figcaption,.visualcontent figcaption{font-size:13px;color:#666;border-bottom:1px solid #ddd;padding:8px 0}.articletext figcaption span,.visualcontent figcaption span{float:right}.visualcontent{max-width:1050px}.visualcontent figure img{width:auto;max-width:100%;max-height:none}.visualcard{padding-top:14px}.cardvisual{display:block;width:100%;height:330px;object-fit:contain;background:#f0f0ee;margin-bottom:18px}.articleNav{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid #ddd;margin-top:55px;padding-top:25px}.articleNav a{display:flex;flex-direction:column;text-decoration:none;background:#fff;padding:18px}.articleNav a.next{text-align:right}.articleNav small{color:#777}.articleNav b{color:var(--city-red)}
+@media(max-width:700px){.pdfdownload{align-items:flex-start;flex-direction:column}.pdfbtn{white-space:normal;width:100%;text-align:center}.articleNav{grid-template-columns:1fr}.articletext figcaption span{float:none;display:block}}
+
+
+/* V3.1 – veřejná část vizuálně navázaná na skutec.cz */
+:root{
+  --city-red:#9d1f2d;
+  --city-red-dark:#7f1723;
+  --city-anthracite:#2f3032;
+  --city-text:#343434;
+  --city-gray:#727272;
+  --city-bg:#f4f4f2;
+  --city-line:#deded9;
+  --city-white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--city-bg);
+  color:var(--city-text);
+  font-family:"Source Sans 3",Arial,sans-serif;
+  font-size:17px;
+}
+.wrap,.topin{max-width:1240px}
+.citybar{
+  background:#fff;
+  border:0;
+  padding:0 28px;
+}
+.citybar .topin{
+  min-height:112px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.citybrand{display:flex;align-items:center;text-decoration:none;color:var(--city-anthracite)}
+.cityidentity{display:flex;flex-direction:column}
+.cityidentity b{
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:43px;
+  line-height:.95;
+  letter-spacing:-.055em;
+  font-weight:800;
+  color:var(--city-anthracite);
+}
+.cityidentity small{
+  margin-top:9px;
+  font-size:15px;
+  line-height:1;
+  color:#666;
+  letter-spacing:.01em;
+}
+.cityback{
+  color:#555;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.cityback:hover{color:var(--city-red)}
+.top{
+  background:var(--city-anthracite);
+  border-bottom:5px solid var(--city-red);
+  padding:0 28px;
+}
+.top .topin{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.top a,.top b,.top span{
+  color:#fff;
+  font-family:"Montserrat",Arial,sans-serif;
+  text-decoration:none;
+}
+.top a,.top b{
+  font-weight:700;
+  letter-spacing:.055em;
+  font-size:14px;
+}
+.top span{font-size:14px;color:#dedede}
+.hero{padding-top:58px}
+.hero .eyebrow{
+  display:inline-block;
+  color:var(--city-red);
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.hero h1,.article h1{
+  font-family:"Montserrat",Arial,sans-serif;
+  color:var(--city-anthracite);
+  font-weight:800;
+  letter-spacing:-.055em;
+}
+.hero h1{font-size:clamp(48px,7vw,92px);line-height:.9;margin:0 0 18px}
+.hero>h2{
+  font-family:"Montserrat",Arial,sans-serif;
+  color:var(--city-red);
+  font-size:25px;
+  margin:0 0 30px;
+}
+h2{
+  font-family:"Montserrat",Arial,sans-serif;
+  color:var(--city-anthracite);
+  font-weight:750;
+}
+.pdfdownload{
+  background:var(--city-white);
+  border:0;
+  border-top:5px solid var(--city-red);
+  padding:27px 30px;
+  margin:34px 0 54px;
+  box-shadow:none;
+}
+.pdfdownload b{
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:20px;
+  color:var(--city-anthracite);
+}
+.pdfdownload p{color:#666}
+.pdfbtn,.primary{
+  background:var(--city-red);
+  border-radius:0;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+}
+.pdfbtn:hover,.primary:hover{background:var(--city-red-dark)}
+.toc{
+  background:#fff;
+  padding:18px 28px;
+  border-top:5px solid var(--city-anthracite);
+}
+.toc li{border-bottom:1px solid var(--city-line)}
+.toc li:last-child{border-bottom:0}
+.toc a{
+  padding:15px 4px;
+  display:grid;
+  grid-template-columns:45px 130px 1fr;
+  gap:12px;
+  align-items:center;
+  text-decoration:none;
+}
+.toc a>span{
+  color:#aaa;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-weight:700;
+}
+.toc a>b{
+  color:var(--city-anthracite);
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:18px;
+}
+.toc a:hover b{color:var(--city-red)}
+.cat{
+  display:inline-flex;
+  width:max-content;
+  border-radius:0;
+  padding:5px 8px;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:10px;
+  font-style:normal;
+  font-weight:800;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+}
+.grid.articles{gap:24px}
+.card{
+  border:0;
+  border-top:5px solid var(--city-red);
+  border-radius:0;
+  box-shadow:none;
+  background:#fff;
+  padding:27px;
+}
+.card:hover{
+  transform:none;
+  box-shadow:none;
+  background:#fafafa;
+}
+.card h2{
+  font-size:27px;
+  line-height:1.08;
+  letter-spacing:-.04em;
+}
+.card p{color:#626262;line-height:1.55}
+.card>b{
+  color:var(--city-red);
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.cardvisual{background:#efefec}
+.article{padding-top:56px;max-width:960px}
+.article h1{
+  font-size:clamp(42px,6vw,72px);
+  line-height:.98;
+  margin:18px 0 28px;
+}
+.articletext{
+  font-family:"Source Sans 3",Arial,sans-serif;
+  font-size:20px;
+  line-height:1.72;
+  color:#373737;
+}
+.articletext p{margin:0 0 1.45em}
+.audio{
+  padding:16px 0 24px;
+  border-top:1px solid var(--city-line);
+  border-bottom:1px solid var(--city-line);
+  margin-bottom:34px;
+}
+.audio button{
+  border-radius:0;
+  font-family:"Montserrat",Arial,sans-serif;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+.articletext figure,.visualcontent figure{margin:45px 0}
+.articletext figcaption,.visualcontent figcaption{
+  font-size:14px;
+  color:#6c6c6c;
+  border-bottom:1px solid var(--city-line);
+}
+.articleNav a{
+  border-top:4px solid var(--city-red);
+  border-radius:0;
+}
+.articleNav small{
+  font-family:"Montserrat",Arial,sans-serif;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.06em;
+}
+.articleNav b{font-family:"Montserrat",Arial,sans-serif}
+.footer{
+  background:var(--city-anthracite);
+  border-top:7px solid var(--city-red);
+  padding:48px 28px;
+}
+.footer b{font-family:"Montserrat",Arial,sans-serif;font-size:22px}
+.footer span{font-size:15px}
+@media(max-width:700px){
+  .citybar{padding:0 18px}
+  .citybar .topin{min-height:88px}
+  .cityidentity b{font-size:34px}
+  .cityidentity small{font-size:13px}
+  .top{padding:0 18px}
+  .top .topin{min-height:54px}
+  .hero{padding-top:38px}
+  .toc{padding:12px 18px}
+  .toc a{grid-template-columns:35px 1fr;gap:8px}
+  .toc .cat{grid-column:2}
+  .toc a>b{grid-column:2}
+  .card{padding:22px}
+  .article{padding-top:38px}
+  .articletext{font-size:18px}
+}
+
+/* =========================================================
+   DIGINOVINY SKUTEČ — V5.2
+   Základní vizuální nastavení:
+   pozadí #fafafa, prvky #cb002b, font Poppins
+   ========================================================= */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/Poppins-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/Poppins-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/Poppins-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --city-red: #cb002b;
+  --city-red-dark: #a90024;
+  --city-anthracite: #252525;
+  --city-text: #252525;
+  --city-muted: #6d6d6d;
+  --city-line: #e4e4e4;
+  --city-bg: #fafafa;
+  --city-white: #ffffff;
+
+  --skutec-red: #cb002b;
+  --skutec-red-dark: #a90024;
+  --skutec-text: #252525;
+  --skutec-muted: #6d6d6d;
+  --skutec-bg: #fafafa;
+  --skutec-soft: #f3f3f3;
+  --skutec-border: #e4e4e4;
+  --red: #cb002b;
+  --primary: #cb002b;
+  --accent: #cb002b;
+}
+
+html,
+body,
+body *,
+button,
+input,
+select,
+textarea {
+  font-family: "Poppins", Arial, sans-serif !important;
+}
+
+html,
+body {
+  background: #fafafa !important;
+  color: #252525;
+}
+
+body {
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero h1,
+.article h1,
+.card h2,
+.toc b {
+  font-family: "Poppins", Arial, sans-serif !important;
+  font-weight: 700 !important;
+}
+
+a {
+  color: #cb002b;
+}
+
+a:hover {
+  color: #a90024;
+}
+
+.top,
+header.top,
+.site-header {
+  border-bottom-color: #cb002b !important;
+}
+
+.hero .eyebrow,
+.hero > h2,
+.eyebrow,
+.card > b,
+.toc a:hover b,
+.article-meta,
+.article .meta {
+  color: #cb002b !important;
+}
+
+.pdfdownload,
+.card,
+.issue-card {
+  border-top-color: #cb002b !important;
+}
+
+.card,
+.issue-card,
+.article,
+.pdfdownload,
+.toc {
+  background: #ffffff;
+}
+
+.pdfbtn,
+.primary,
+button.primary,
+.btn-primary {
+  background: #cb002b !important;
+  border-color: #cb002b !important;
+  color: #ffffff !important;
+}
+
+.pdfbtn:hover,
+.primary:hover,
+button.primary:hover,
+.btn-primary:hover {
+  background: #a90024 !important;
+  border-color: #a90024 !important;
+  color: #ffffff !important;
+}
+
+.audio button {
+  font-family: "Poppins", Arial, sans-serif !important;
+}
+
+.audio button:first-child,
+.issueaudio .primary {
+  background: #cb002b !important;
+  border-color: #cb002b !important;
+  color: #ffffff !important;
+}
+
+.searchform {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0 42px;
+}
+
+.searchform input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px 17px;
+  border: 1px solid #e4e4e4;
+  background: #ffffff;
+  font: 400 17px "Poppins", Arial, sans-serif !important;
+}
+
+.searchform button {
+  border: 0;
+  padding: 0 24px;
+}
+
+.issueaudio {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 18px 0 35px;
+}
+
+.issueaudio button {
+  padding: 11px 14px;
+  border-radius: 0;
+}
+
+.related {
+  border-top: 5px solid #cb002b;
+  margin-top: 55px;
+  padding-top: 25px;
+}
+
+.related .grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.related .card h2 {
+  font-size: 21px;
+}
+
+.footer,
+footer {
+  border-top-color: #cb002b !important;
+}
+
+.cat {
+  font-family: "Poppins", Arial, sans-serif !important;
+  font-weight: 600 !important;
+}
+
+/* Kategorie zůstávají barevně rozlišené podle tématu. */
+
+@media (max-width: 600px) {
+  .searchform {
+    flex-direction: column;
+  }
+
+  .searchform button {
+    padding: 14px;
+  }
+}
+
+/* V5.3 schválené UI úpravy */
+.top b,.top .brand,.site-header .brand{color:#fff!important}
+.hero>h2,.hero .subtitle{color:#cb002b!important}
+.card>b,.issue-card>b,.card .month,.issue-card .month{color:#cb002b!important}
+.top img,.site-header img,header img{max-height:58px;width:auto;object-fit:contain}
+.toc .num,.toc .number,.toc a>span:first-child{color:#9a9a9a!important;font-weight:500!important}
+
+/* Finální schválený vzhled */
+html,body{background:#fafafa!important}
+html,body,body *,button,input,select,textarea{font-family:"Poppins",Arial,sans-serif!important}
+:root{--city-red:#cb002b;--primary:#cb002b;--accent:#cb002b}
+.cityidentity img{display:block!important;width:auto!important;height:auto!important;max-width:210px!important;max-height:72px!important;object-fit:contain!important}
+.hero>h2,.hero .subtitle,.card h2,.card>b,.issue-card .month{color:#cb002b!important}
+.toc .num,.toc .number{color:#9a9a9a!important;font-weight:500!important}
+
+/* Obsah vydání: pouze vlastní dvouciferné číslování 01, 02, ... */
+.toc{list-style:none!important;padding-left:0!important;margin-left:0!important}
+.toc>a{display:grid}
+.toc>a>span:first-child{color:#9a9a9a!important;font-weight:500!important}

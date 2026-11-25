@@ -1,0 +1,98 @@
+
+:root{--ink:#172033;--paper:#f4f0e8;--white:#fff;--muted:#68717d;--line:#d8d2c7;--accent:#a3232f}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif;line-height:1.6}a{color:inherit}
+.top{background:var(--ink);color:white;padding:18px 24px}.topin,.wrap{max-width:1180px;margin:auto}.topin{display:flex;justify-content:space-between;align-items:center}.brand{text-decoration:none;font-weight:800}
+.wrap{padding:42px 24px 90px}.hero h1{font:700 clamp(46px,8vw,90px)/.95 Georgia,serif;margin:10px 0}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:12px;font-weight:800;color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}.card{background:white;padding:25px;text-decoration:none;border-top:5px solid var(--ink)}.card h2{font:700 29px/1.1 Georgia,serif}
+button,.btn{border:0;border-radius:7px;padding:10px 13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:#2367d1;color:white}.success{background:#16803c;color:white}.ghost{background:#e7ebf1}.danger{background:#eee;color:#8a1f1f}
+table{width:100%;border-collapse:collapse;background:white}th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line)}
+.form{background:white;padding:22px;margin-bottom:30px}.formrow{display:flex;gap:10px;flex-wrap:wrap}.form input{padding:10px}
+.cat{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
+.cat-investice{background:#e8f1ff;color:#174f9b}.cat-radnice{background:#efe8ff;color:#6030a8}.cat-osobnosti{background:#f6e8e8;color:#8e2930}.cat-sport{background:#e6f5e9;color:#246c35}.cat-kultura{background:#fff0d9;color:#945a00}.cat-skolstvi{background:#e4f5f5;color:#11666a}.cat-spolky{background:#f2eadf;color:#79512c}.cat-ostatni{background:#eceff2;color:#4c5966}
+.article{max-width:800px}.article h1{font:700 clamp(42px,7vw,72px)/1 Georgia,serif}.articletext{font:20px/1.75 Georgia,serif;white-space:pre-wrap}.audio{background:white;padding:15px;margin:25px 0;display:flex;gap:8px;flex-wrap:wrap}
+
+
+/* Jednotný vzhled editoru podle DigiNovin */
+:root{
+  --red:#cb002b !important;
+  --primary:#cb002b !important;
+  --accent:#cb002b !important;
+  --bg:#fafafa !important;
+  --panel:#ffffff !important;
+  --text:#252525 !important;
+  --muted:#737373 !important;
+  --line:#e3e3e3 !important;
+}
+html,body{background:#fafafa !important;color:#252525 !important}
+body,button,input,textarea,select{font-family:"Poppins",Arial,sans-serif !important}
+header,.topbar,.toolbar{border-color:#cb002b !important}
+button,.btn{border-radius:0 !important}
+button.primary,.btn.primary,.primary{background:#cb002b !important;border-color:#cb002b !important;color:#fff !important}
+button.primary:hover,.btn.primary:hover{background:#a90024 !important;border-color:#a90024 !important}
+.panel,.card,.editor,.sidebar,.workspace{background:#fff}
+.status,.ready,.prepared,[data-status]{color:#737373 !important;font-weight:500 !important}
+#exportBtn,.export-btn,[data-action="export"],a[download]{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  background:#252525 !important;
+  color:#fff !important;
+  border:1px solid #252525 !important;
+  padding:11px 16px !important;
+  font-weight:700 !important;
+  text-decoration:none !important;
+  min-height:42px;
+  align-items:center;
+}
+
+/* Jasně viditelný ruční export */
+.exportVisible{
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  align-items:center!important;
+  background:#252525!important;
+  border:1px solid #252525!important;
+  color:#fff!important;
+  padding:10px 15px!important;
+  font-weight:700!important;
+  cursor:pointer!important;
+  min-height:42px!important;
+}
+.exportVisible:hover{background:#000!important;border-color:#000!important}
+
+.approveAll{background:#fff!important;border:1px solid #cb002b!important;color:#cb002b!important;font-weight:700!important}
+.approveAll:hover{background:#cb002b!important;color:#fff!important}
+
+/* Výběr bloků: plocha = nejmenší blok, štítek = přesný blok, obrázek = přímé kliknutí */
+.block .tag{pointer-events:auto!important;cursor:pointer!important;z-index:30!important}
+.block .tag:hover{transform:scale(1.08);box-shadow:0 2px 8px rgba(0,0,0,.28)}
+.imgblock{pointer-events:auto!important;cursor:pointer!important;z-index:20!important}
+.imgblock:hover{outline:3px solid #cb002b!important;outline-offset:1px}
+
+/* Jednotný hit-test PDF: překryvy jsou pouze vizuální, kliknutí vyhodnocuje stránka podle bbox. */
+.page .block,.page .imgblock{pointer-events:none!important}
+.page .block .tag,.page .imgblock .tag{pointer-events:none!important}
+
+.captionrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:center;margin-top:5px}
+.captionrow input{margin-top:0!important}
+.captionrow button{white-space:nowrap}
+
+/* Výřezy a přehled médií */
+.mediaHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.mediaHead h3{margin:0}
+.mediaTray{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))!important;gap:12px!important}
+.mediaCard{padding:0!important;overflow:hidden;background:#fff;border:1px solid #d9dde4!important}
+.mediaCard.used{border-color:#198754!important}
+.mediaThumb{position:relative;background:#e9edf2;overflow:hidden}
+.mediaThumb>div{height:145px!important}
+.mediaUsed{position:absolute;top:8px;right:8px;background:#198754;color:#fff;font-size:11px;font-weight:700;padding:5px 7px}
+.mediaCardBody{padding:10px;display:flex;flex-direction:column;gap:7px}
+.mediaCardBody>b{font-size:13px}
+.mediaCardBody>small{display:block;min-height:34px;max-height:52px;overflow:hidden;color:#555;line-height:1.35}
+.mediaCardActions{display:flex;gap:6px;flex-wrap:wrap}
+
+
+.pdfCropPreview{width:100%;min-height:90px;max-height:220px;background-color:#e9edf2;border:1px solid #d9dde4;background-repeat:no-repeat!important}
+.mediaThumb .pdfCropPreview{height:auto!important;min-height:120px;max-height:170px}
+.contentblock.image .pdfCropPreview{height:auto!important;min-height:160px;max-height:320px}
