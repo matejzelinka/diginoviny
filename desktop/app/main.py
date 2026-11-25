@@ -30,23 +30,23 @@ def historical_lexicon() -> set[str]:
     return words
 
 def clean_text(text: str) -> str:
-    """Normalize extracted PDF text without flattening meaningful paragraph breaks."""
+    """Normalize PDF text, joining wrapped lines while retaining paragraph gaps."""
     text = unicodedata.normalize("NFC", text or "")
     text = text.replace("\ufffe", "").replace("\u00ad", "")
 
-    # A line break after a hyphen is a likely PDF line-wrap. Do not join a
-    # hyphen followed only by an ordinary space: that may be a real hyphen.
+    # Join words split by a real line break after a hyphen. A plain space
+    # after a hyphen is ambiguous and is therefore deliberately left alone.
     text = re.sub(
         r"([A-Za-zÁ-ž]{2,})-[ \t]*\r?\n[ \t]*([a-zá-ž][A-Za-zÁ-ž]*)",
         r"\1\2",
         text,
     )
 
-    # Normalize spacing within lines, but retain blank lines as paragraph breaks.
-    lines = [re.sub(r"[ \t]+", " ", line).strip() for line in text.splitlines()]
-    text = "\n".join(lines)
-    text = re.sub(r"\n{3,}", "\n\n", text)
-    return text.strip()
+    # PyMuPDF often returns one line per visual PDF line. Collapse those
+    # single line breaks, but preserve blank lines as paragraph separators.
+    paragraphs = re.split(r"\r?\n\s*\r?\n+", text)
+    paragraphs = [re.sub(r"\s+", " ", p).strip() for p in paragraphs]
+    return "\n\n".join(p for p in paragraphs if p)
 
 def article_checks(a: dict) -> dict:
     errors=[]
