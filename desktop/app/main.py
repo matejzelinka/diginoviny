@@ -96,38 +96,94 @@ def category_guess(text: str):
     return "ostatni","Ostatní"
 
 def suggest_articles(issue: dict):
-    # Conservative layout heuristic learned from previously approved issues:
-    # short blocks act as title candidates; following same-column blocks are grouped until next title.
+    """Create conservative article proposals using page geometry, not global PDF order."""
     approved=[]
-    for p in DATA.glob("*.json"):
+    for path in DATA.glob("*.json"):
         try:
-            d=json.loads(p.read_text(encoding="utf-8"))
-            approved += [a for a in d.get("articles",[]) if a.get("approved")]
-        except Exception: pass
-    title_max=max(90, int(sum(len(a.get("title","")) for a in approved)/max(1,len(approved))*2.2)) if approved else 90
-    out=[]
-    for page in issue.get("pages",[]):
-        bs=page.get("blocks",[])
-        candidates=[i for i,b in enumerate(bs) if 3<=len(b["text"].strip())<=title_max and len(b["text"].split())<=12 and not b["text"].strip().endswith((".",",",";"))]
-        for ci,i in enumerate(candidates):
-            title=bs[i]; x0,y0,x1,y1=title["bbox"]; ids=[]
-            stop=candidates[ci+1] if ci+1<len(candidates) else len(bs)
-            for b in bs[i+1:stop]:
-                bx0,by0,bx1,by1=b["bbox"]
-                overlap=max(0,min(x1,bx1)-max(x0,bx0))/max(1,min(x1-x0,bx1-bx0))
-                if overlap>.45 or abs(bx0-x0)<45: ids.append(b["id"])
-            if ids:
-                text=" ".join(next(x["text"] for x in bs if x["id"]==bid) for bid in ids)
-                cat,label=category_guess(title["text"]+" "+text)
-                out.append({"id":str(uuid.uuid4()),"title":title["text"],"headline":title["id"],"blocks":ids,"images":[],"regions":[],"text":text,"content":[{"type":"paragraph","text":text}],"manuallyEdited":False,"type":"article","category":cat,"categoryLabel":label,"approved":False,"suggested":True})
-    # remove likely duplicates/very weak proposals
-    seen=set(); clean=[]
-    for a in out:
-        key=a["title"].lower()
-        if key not in seen and len(a["text"])>80:
-            seen.add(key); clean.append(a)
-    return clean[:80]
+            data=json.loads(path.read_text(encoding="utf-8"))
+            approved += [a for a in data.get("articles",[]) if a.get("approved")]
+        except Exception:
+            pass
 
+    title_lengths=[len((a.get("title") or "").strip()) for a in approved if a.get("title")]
+    title_max=max(70,min(110,int(sum(title_lengths)/len(title_lengths)*2.2))) if title_lengths else 90
+    out=[]
+
+    for page in issue.get("pages",[]):
+        blocks=[]
+        for block in page.get("blocks",[]):
+            text=(block.get("text") or "").strip()
+            bbox=block.get("bbox") or []
+            if len(bbox)!=4 or not text:
+                continue
+            x0,y0,x1,y1=[float(v) for v in bbox]
+            if x1<=x0 or y1<=y0:
+                continue
+            blocks.append({**block,"text":text,"bbox":[x0,y0,x1,y1]})
+
+        candidates=[]
+        for block in blocks:
+            text=block["text"]
+            words=text.split()
+            if (3<=len(text)<=title_max and len(words)<=12
+                    and not text.endswith((".",",",";","!", "?"))
+                    and not re.fullmatch(r"[\d\W]+",text)):
+                candidates.append(block)
+        candidates.sort(key=lambda b:(b["bbox"][1],b["bbox"][0]))
+
+        for title in candidates:
+            x0,y0,x1,y1=title["bbox"]
+            title_width=max(1,x1-x0)
+            column_blocks=[]
+            for block in blocks:
+                if block["id"]==title["id"]:
+                    continue
+                bx0,by0,bx1,by1=block["bbox"]
+                if by0 < y1-1:
+                    continue
+                overlap=max(0,min(x1,bx1)-max(x0,bx0))/max(1,min(title_width,bx1-bx0))
+                if overlap>=0.45 or abs(bx0-x0)<=42:
+                    column_blocks.append(block)
+
+            later_titles=[]
+            for other in candidates:
+                if other["id"]==title["id"] or other["bbox"][1]<=y1:
+                    continue
+                ox0,oy0,ox1,oy1=other["bbox"]
+                overlap=max(0,min(x1,ox1)-max(x0,ox0))/max(1,min(title_width,ox1-ox0))
+                if overlap>=0.45 or abs(ox0-x0)<=42:
+                    later_titles.append(oy0)
+            stop_y=min(later_titles) if later_titles else float("inf")
+            column_blocks=[b for b in column_blocks if b["bbox"][1]<stop_y]
+            column_blocks.sort(key=lambda b:(b["bbox"][1],b["bbox"][0]))
+
+            ids=[b["id"] for b in column_blocks]
+            text=clean_text(" ".join(b["text"] for b in column_blocks))
+            if not ids or len(text)<100:
+                continue
+            cat,label=category_guess(title["text"]+" "+text)
+            out.append({
+                "id":str(uuid.uuid4()),"title":title["text"],"headline":title["id"],
+                "blocks":ids,"images":[],"regions":[],"text":text,
+                "content":[{"type":"paragraph","text":text}],
+                "manuallyEdited":False,"type":"article","category":cat,
+                "categoryLabel":label,"approved":False,"suggested":True
+            })
+
+    clean=[]
+    seen_titles=set()
+    seen_blocks=[]
+    for article in sorted(out,key=lambda a:(-len(a["blocks"]),a["title"].lower())):
+        key=re.sub(r"\s+"," ",article["title"].lower()).strip()
+        if key in seen_titles:
+            continue
+        current=set(article["blocks"])
+        if any(len(current & prior)/max(1,len(current))>0.75 for prior in seen_blocks):
+            continue
+        seen_titles.add(key)
+        seen_blocks.append(current)
+        clean.append(article)
+    return clean[:80]
 
 def text_quality(text: str) -> dict:
     """Heuristika: pozná rozbitý PDF encoding typu ýW\ĜOHWp..."""
